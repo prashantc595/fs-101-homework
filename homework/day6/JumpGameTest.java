@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
 public class JumpGameTest {
+	
+	// Time Complexity : - O(2^n)
 
 	JumpGame jump=new JumpGame();
 	

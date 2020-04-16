@@ -9,6 +9,8 @@ import org.junit.Test;
 
 public class TripletsTest {
 	
+	// Time Complexity : - O(n^3) + O(1)
+	
 	Triplets triplet = new Triplets();
 	
 	@Test
