@@ -1,0 +1,116 @@
+Tables :
+---------
+
+Customer :
+------------
+CREATE TABLE CUSTOMER (
+CUSTNO INT NOT NULL,
+NAME VARCHAR(50),
+ADDRESS VARCHAR(50),
+CITY VARCHAR(50),
+PRIMARY KEY(CUSTNO)
+);
+
+Orders:
+---------
+
+CREATE TABLE ORDERS (
+ORDERNO INT NOT NULL,
+ORDERDATE DATE,
+CUSTNO INT,
+FOREIGN KEY (CUSTNO) REFERENCES CUSTOMER(CUSTNO)
+);
+
+Products :
+------------
+
+CREATE TABLE PRODUCTS (
+PRODUCTNO VARCHAR(50),
+PRODUCTNAME VARCHAR(50),
+QUANTITY INT NOT NULL,
+PRICE DOUBLE NOT NULL,
+CUSTNO INT,
+ORDERNO INT,
+FOREIGN KEY (CUSTNO) REFERENCES CUSTOMER(CUSTNO),
+FOREIGN KEY (ORDERNO) REFERENCES ORDERS(ORDERNO)
+);
+
+
+
+Customer Table entries :
+----------------------------
+
+INSERT INTO Customer (CUSTNO, NAME, ADDRESS, CITY)
+VALUES (1000,'Rahul','A-1/16 DLF','Gurgaon');
+
+INSERT INTO Customer (CUSTNO, NAME, ADDRESS, CITY)
+VALUES (1001,'Mridul','L-16 Unitech','Gurgaon');
+
+INSERT INTO Customer (CUSTNO, NAME, ADDRESS, CITY)
+VALUES (1002,'Akshay','H6 Sector 23','Gurgaon');
+
+
+Order Table entries :
+-------------------------
+
+INSERT INTO Orders(OrderNo,OrderDate,CUSTNO)
+VALUES (1,TO_DATE('1-Jan-20','DD-MON-YY'),1000);
+
+INSERT INTO Orders(OrderNo,OrderDate,CUSTNO)
+VALUES (2,TO_DATE('21-Jan-20','DD-MON-YY'),1001);
+
+INSERT INTO Orders(OrderNo,OrderDate,CUSTNO)
+VALUES (3,TO_DATE('2-Feb-20','DD-MON-YY'),1002);
+
+INSERT INTO Orders(OrderNo,OrderDate,CUSTNO)
+VALUES (4,TO_DATE('12-Feb-20','DD-MON-YY'),1002);
+
+INSERT INTO Orders(OrderNo,OrderDate,CUSTNO)
+VALUES (5,TO_DATE('21-Feb-20','DD-MON-YY'),1001);
+
+
+
+
+Product Table entries: 
+-------------------------
+
+INSERT INTO Products(ProductNo, ProductName, Quantity, Price, CUSTNO, ORDERNO)
+VALUES ('A100','Pencil',100,10,1000,1);
+INSERT INTO Products(ProductNo, ProductName, Quantity, Price, CUSTNO, ORDERNO)
+VALUES ('B100','Notebook',10,40,1000,1);
+INSERT INTO Products(ProductNo, ProductName, Quantity, Price, CUSTNO, ORDERNO)
+VALUES ('B200','Colors',15,40,1000,1);
+
+
+INSERT INTO Products(ProductNo, ProductName, Quantity, Price, CUSTNO, ORDERNO)
+VALUES ('A110','A4 Paper',10,100,1001,2);
+INSERT INTO Products(ProductNo, ProductName, Quantity, Price, CUSTNO, ORDERNO)
+VALUES ('A101','Pens',10,10,1001,2);
+INSERT INTO Products(ProductNo, ProductName, Quantity, Price, CUSTNO, ORDERNO)
+VALUES ('B201','Water Colors',5,50,1001,2);
+
+
+INSERT INTO Products(ProductNo, ProductName, Quantity, Price, CUSTNO, ORDERNO)
+VALUES ('A115','Sand Paper',105,10,1002,3);
+INSERT INTO Products(ProductNo, ProductName, Quantity, Price, CUSTNO, ORDERNO)
+VALUES ('A111','Wood',10,1000,1002,3);
+INSERT INTO Products(ProductNo, ProductName, Quantity, Price, CUSTNO, ORDERNO)
+VALUES ('B251','Paints',1,1500,1002,3);
+
+
+INSERT INTO Products(ProductNo, ProductName, Quantity, Price, CUSTNO, ORDERNO)
+VALUES ('A125','tapes',50,75,1002,4);
+INSERT INTO Products(ProductNo, ProductName, Quantity, Price, CUSTNO, ORDERNO)
+VALUES ('A111','Wood',5,1000,1002,4);
+
+
+INSERT INTO Products(ProductNo, ProductName, Quantity, Price, CUSTNO, ORDERNO)
+VALUES ('A109','Folder',10,1,1000,5);
+INSERT INTO Products(ProductNo, ProductName, Quantity, Price, CUSTNO, ORDERNO)
+VALUES ('B109','Scrap Book',4,40,1000,5);
+
+
+
+
+
+

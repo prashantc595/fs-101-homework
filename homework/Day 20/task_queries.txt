@@ -1,0 +1,66 @@
+task 1:
+--------
+
+select customer.name, sum(price) from products inner join customer on products.custno=customer.custno group by customer.name;
+
+task 2:
+---------
+
+for january
+-------------
+select name from customer where custno in (select orders.custno from orders inner join products on orders.custno=products.custno where orders.orderdate between TO_DATE('1-Jan-20','DD-MON-YY') and TO_DATE('31-Jan-20','DD-MON-YY') 
+group by orders.custno order by sum(quantity) desc);
+
+
+for february :
+----------------
+
+select name from customer where custno in (select orders.custno from orders inner join products on orders.custno=products.custno where orders.orderdate between TO_DATE('1-Feb-20','DD-MON-YY') and TO_DATE('29-Feb-20','DD-MON-YY') 
+group by orders.custno order by sum(quantity) desc);
+
+
+task 3:
+-------------
+
+for january :
+--------------
+
+select avg(price) from products inner join Orders on Products.orderno=Orders.Orderno where orders.orderdate between TO_DATE('1-Jan-20','DD-MON-YY') and TO_DATE('31-Jan-20','DD-MON-YY');
+
+for february :
+--------------
+
+select avg(price) from products inner join Orders on Products.orderno=Orders.Orderno where orders.orderdate between TO_DATE('1-Feb-20','DD-MON-YY') and TO_DATE('29-Feb-20','DD-MON-YY');
+
+
+task 4:
+------
+for january :
+---------------
+
+product name with minimum order query :
+----------------------------------------
+
+select productname from products inner join orders on products.orderno=orders.orderno where orders.orderdate between TO_DATE('1-Jan-20','DD-MON-YY') and TO_DATE('31-Jan-20','DD-MON-YY') group by productname,quantity order by quantity limit 1;
+
+
+product name with maximum order query :
+---------------------------------------------
+
+select productname from products inner join orders on products.orderno=orders.orderno where orders.orderdate between TO_DATE('1-Jan-20','DD-MON-YY') and TO_DATE('31-Jan-20','DD-MON-YY') group by productname,quantity order by quantity desc limit 1;
+
+
+
+for february :
+---------------
+
+product name with minimum order query :
+----------------------------------------
+
+select productname from products inner join orders on products.orderno=orders.orderno where orders.orderdate between TO_DATE('1-Feb-20','DD-MON-YY') and TO_DATE('29-Feb-20','DD-MON-YY') group by productname,quantity order by quantity limit 1;
+
+
+product name with maximum order query :
+---------------------------------------------
+
+select productname from products inner join orders on products.orderno=orders.orderno where orders.orderdate between TO_DATE('1-Feb-20','DD-MON-YY') and TO_DATE('29-Feb-20','DD-MON-YY') group by productname,quantity order by quantity desc limit 1;
