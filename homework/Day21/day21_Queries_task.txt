@@ -1,0 +1,52 @@
+PREPARE COMMIT Insert;
+
+INSERT INTO Customer (CUSTNO, NAME, ADDRESS, CITY)
+VALUES (1010,'Mayank','G16 Sec 29','Gurgaon');
+INSERT INTO Customer (CUSTNO, NAME, ADDRESS, CITY)
+VALUES (1011,'Rakesh','16A DLF PH 1','Gurgaon');
+
+INSERT INTO Orders(OrderNo,OrderDate,CUSTNO)
+VALUES (6,TO_DATE('1-Mar-20','DD-MON-YY'),1010);
+INSERT INTO Orders(OrderNo,OrderDate,CUSTNO)
+VALUES (7,TO_DATE('21-Mar-20','DD-MON-YY'),1011);
+
+INSERT INTO Products(ProductNo, ProductName, Quantity, Price, CUSTNO, ORDERNO)
+VALUES ('A100','Pencil',100,10,1010,6);
+INSERT INTO Products(ProductNo, ProductName, Quantity, Price, CUSTNO, ORDERNO)
+VALUES ('A109','NoFolder',10,1,1011,7);
+
+COMMIT TRANSACTION Insert;
+
+
+------------------------------------------------------------------------------------------------------
+
+PREPARE COMMIT Update;
+
+UPDATE CUSTOMER SET CITY='Delhi' WHERE CUSTNO=1000
+
+UPDATE CUSTOMER SET CITY='Delhi' WHERE CUSTNO=1001
+
+UPDATE CUSTOMER SET CITY='Delhi' WHERE CUSTNO=1002
+
+UPDATE CUSTOMER SET CITY='Delhi' WHERE CUSTNO=1010
+
+UPDATE CUSTOMER SET CITY='Delhi' WHERE CUSTNO=1011
+
+COMMIT TRANSACTION Update;
+
+
+------------------------------------------------------------------------------------------------------------
+
+BEGIN TRANSACTION Recovery
+ 
+  SELECT @BookCount = COUNT(*) FROM CUSTOMER WHERE CIY= 'Delhi'
+ 
+  IF @BookCount > 0
+    BEGIN 
+      ROLLBACK TRANSACTION Recovery
+    END
+  ELSE
+    BEGIN
+      COMMIT TRANSACTION Recovery
+    END
+
